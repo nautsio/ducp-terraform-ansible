@@ -24,4 +24,5 @@ Change directory to the chose provider (aws/gce), then run ansible-playbook:
 cd ../{aws,gce}
 TERRAFORM_STATE_ROOT=. ansible-playbook -i ../terraform.py/terraform.py \
                        ../ansible/site.yml \
-                       --extra-vars "@../ansible/vars.yml"```
+                       --extra-vars "@../ansible/vars.yml"
+```
