@@ -1,0 +1,12 @@
+---
+- name: "Register GCE external ip"
+  shell: 'curl "http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip" -H "Metadata-Flavor: Google"'
+  register: gce_extip
+  when: ansible_product_name == "Google"
+- name: "Register AWS external ip"
+  shell: 'curl http://169.254.169.254/latest/meta-data/public-ipv4'
+  register: aws_extip
+  when: ansible_product_version | search("amazon")
+- name: set extip
+  set_fact:
+      extip: "{{ gce_extip.stdout_lines[0] if gce_extip.skipped is not defined else aws_extip.stdout }}"

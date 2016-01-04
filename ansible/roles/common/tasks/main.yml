@@ -1,0 +1,20 @@
+---
+- name: "Wait for SSH to be available on the hosts"
+  wait_for: port=22 host="{{ ansible_ssh_host }}" search_regex=OpenSSH
+- name: "gather facts"
+  setup:
+- name: "Install apt key Docker"
+  sudo: yes
+  apt_key: keyserver="hkp://p80.pool.sks-keyservers.net:80" id="58118E89F3A912897C070ADBF76221572C52609D"
+- name: "Install apt repository Docker"
+  sudo: yes
+  apt_repository: repo='deb https://apt.dockerproject.org/repo ubuntu-trusty testing' state=present
+- name: "Install Docker package"
+  sudo: yes
+  apt: name=docker-engine update_cache=yes
+- name: "Install python-pip package"
+  sudo: yes
+  apt: name=python-pip update_cache=yes
+- name: "Install docker-py pip package"
+  sudo: yes
+  pip: name=docker-py

@@ -1,0 +1,5 @@
+region = ""
+access_key = ""
+secret_key = ""
+key_name = ""
+replica_count = "2"

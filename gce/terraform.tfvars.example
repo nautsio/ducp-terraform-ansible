@@ -1,0 +1,6 @@
+project = ""
+credentials = ""
+region = ""
+zone = ""
+ssh_user = ""
+replica_count = "2"

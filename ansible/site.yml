@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: False
+  roles:
+  - common
+  - extip
+- hosts: ducp-controller
+  roles:
+  - controller
+- hosts: ducp-replica*
+  roles:
+  - replica
