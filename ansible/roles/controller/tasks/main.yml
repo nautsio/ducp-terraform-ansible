@@ -3,7 +3,7 @@
   sudo: yes
   docker:
     name: ucp
-    image: dockerorca/ucp
+    image: docker/ucp
     state: started
     pull: always
     detach: False
@@ -13,9 +13,6 @@
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     env:
-      REGISTRY_EMAIL: "{{ hub_registry_email }}"
-      REGISTRY_USERNAME: "{{ hub_registry_username }}"
-      REGISTRY_PASSWORD: "{{ hub_registry_password }}"
       UCP_ADMIN_USER: "{{ ucp_admin_user }}"
       UCP_ADMIN_PASSWORD: "{{ ucp_admin_password }}"
 - name: "Wait for ucp installation container to finish"
@@ -23,5 +20,5 @@
   shell: docker wait ucp
 - name: "Register certificate fingerprint"
   sudo: yes
-  shell: "docker run -ti -v /var/run/docker.sock:/var/run/docker.sock dockerorca/ucp fingerprint | awk -F= '{ print $2 }'"
+  shell: "docker run -ti -v /var/run/docker.sock:/var/run/docker.sock docker/ucp fingerprint | awk -F= '{ print $2 }'"
   register: ducp_controller_fingerprint
