@@ -5,7 +5,9 @@ Setting up Docker Universal Control Plane with the use of Terraform and Ansible.
 
 ## Instructions
 ### Clone
-Clone this repository
+Clone this repository recursively (because of added submodule for terraform.py)
+
+```git clone https://github.com/nautsio/ducp-terraform-ansible.git --recursive```
 ### AWS / GCP
 In aws or gce directory:
 
