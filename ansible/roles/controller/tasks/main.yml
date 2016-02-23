@@ -1,4 +1,6 @@
 ---
+- name: Copy license
+  copy: src={{ license_source }}  dest=/tmp/docker_subscription.lic
 - name: "Run ucp container to install DUCP as controller"
   sudo: yes
   docker:
@@ -12,6 +14,7 @@
     command: install --san "{{ extip }}"
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
+    - /tmp/docker_subscription.lic:/docker_subscription.lic
     env:
       UCP_ADMIN_USER: "{{ ucp_admin_user }}"
       UCP_ADMIN_PASSWORD: "{{ ucp_admin_password }}"
